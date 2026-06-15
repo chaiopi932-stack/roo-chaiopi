@@ -1,12 +1,36 @@
-console.log("JS LOADED");
+console.log("GAME READY");
+
+const text = "Welcome to Midgard...";
+let i = 0;
+
+function typing() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text[i];
+    i++;
+    setTimeout(typing, 50);
+  }
+}
+typing();
 
 function login() {
-  const win = document.querySelector(".window");
+  const login = document.getElementById("login");
+  const loading = document.getElementById("loading");
+  const game = document.getElementById("game");
 
-  win.style.transition = "0.5s";
-  win.style.opacity = "0";
+  // LOGIN fade out
+  login.style.transition = "0.5s";
+  login.style.opacity = "0";
 
   setTimeout(() => {
-    win.style.display = "none";
+    login.style.display = "none";
+
+    // LOADING
+    loading.style.display = "block";
+
+    setTimeout(() => {
+      loading.style.display = "none";
+      game.style.display = "block";
+    }, 1500);
+
   }, 500);
 }
