@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Midgard Login</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- 🎮 背景 -->
-  <div class="bg"></div>
+<!-- 🎮 背景 -->
+<div class="bg"></div>
+<div class="fog"></div>
+<div class="vignette"></div>
 
-  <!-- 🪟 登入框 -->
-  <div class="window">
-    <div class="title">Login Window</div>
+<!-- 🪟 LOGIN -->
+<div class="window" id="login">
+  <div class="title">Login Window</div>
 
-    <div class="content">
-      <div>Welcome to Midgard...</div>
+  <div class="content">
+    <div id="typing"></div>
 
-      <input type="text" placeholder="Account ID">
-      <input type="password" placeholder="Password">
+    <input placeholder="Account ID">
+    <input type="password" placeholder="Password">
 
-      <button onclick="login()">OK</button>
+    <button onclick="login()">OK</button>
 
-      <div style="font-size:12px;color:#aaa;margin-top:8px;">
-        Create Account ｜ Find Password
-      </div>
-    </div>
+    <div class="links">Create Account ｜ Find Password</div>
   </div>
+</div>
 
-  <script src="game.js"></script>
+<!-- ⏳ LOADING -->
+<div class="loading" id="loading">
+  Entering Midgard...
+</div>
+
+<!-- 🎮 GAME -->
+<div class="game" id="game">
+  GAME START
+</div>
+
+<script src="game.js"></script>
 
 </body>
 </html>
