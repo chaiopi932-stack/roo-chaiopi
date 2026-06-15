@@ -1,56 +1,18 @@
-console.log("GAME READY");
+function showScene(id) {
+  document.querySelectorAll(".scene").forEach(s => {
+    s.classList.remove("active");
+  });
 
-const text = "Welcome to Midgard...";
-let i = 0;
-
-/* ================= TYPING ================= */
-function typing() {
-  const el = document.getElementById("typing");
-  if (!el) return;
-
-  if (i === 0) el.innerHTML = "";
-
-  if (i < text.length) {
-    el.innerHTML += text[i];
-    i++;
-    setTimeout(typing, 50);
-  }
+  document.getElementById(id).classList.add("active");
 }
 
-/* ================= LOGIN ================= */
-function login() {
-  showScene("loading");
-
-  let p = 0;
-  let bar = document.querySelector(".bar");
-
-  let t = setInterval(() => {
-    p += 2;
-
-    if (bar) bar.style.width = p + "%";
-
-    if (p >= 100) {
-      clearInterval(t);
-
-      showScene("char"); // ⭐ 正確：進角色選擇
-    }
-  }, 25);
+/* LOGIN → CHAR */
+function goChar() {
+  showScene("char");
 }
 
-/* ================= CHARACTER SELECT ================= */
-function enterGame(job) {
-  console.log("Selected:", job);
-
+/* CHAR → GAME */
+function enterGame() {
   showScene("game");
-
-  startGame(job);
-}
-
-/* ================= GAME START ================= */
-function startGame(job) {
-  console.log("GAME STARTED:", job);
-
-  i = 0; // reset typing
-
-  typing();
+  console.log("GAME STARTED");
 }
