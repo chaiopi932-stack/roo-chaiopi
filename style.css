@@ -1,21 +1,41 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  overflow: hidden;
+  font-family: Arial;
   background: black;
 }
 
-/* 🎮 背景（保證一定看得到） */
+/* 🎮 背景 */
 .bg {
   position: fixed;
   inset: 0;
 
-  background-image: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png");
+  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
-/* 🪟 登入視窗 */
+/* 🌫 霧 */
+.fog {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
+  animation: fogMove 20s linear infinite;
+}
+
+@keyframes fogMove {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(-200px,-100px); }
+}
+
+/* 🌑 暗角 */
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7));
+}
+
+/* 🪟 LOGIN */
 .window {
   position: absolute;
   top: 50%;
@@ -23,11 +43,10 @@ body {
   transform: translate(-50%, -50%);
 
   width: 320px;
-
   background: rgba(0,0,0,0.8);
   border: 2px solid gold;
 
-  color: white;
+  z-index: 10;
 }
 
 .title {
@@ -39,6 +58,7 @@ body {
 
 .content {
   padding: 10px;
+  color: white;
 }
 
 input {
@@ -51,4 +71,24 @@ button {
   width: 100%;
   margin-top: 10px;
   padding: 8px;
+}
+
+/* ⏳ LOADING */
+.loading {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+  font-size: 18px;
+}
+
+/* 🎮 GAME */
+.game {
+  display: none;
+  color: white;
+  text-align: center;
+  margin-top: 40vh;
+  font-size: 30px;
 }
