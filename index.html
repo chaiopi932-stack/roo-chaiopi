@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>MMO Scene System V2</title>
+<title>MMO Scene System V2 FULL</title>
 
 <style>
 * {
@@ -12,14 +12,13 @@
   box-sizing: border-box;
 }
 
-/* ================= BASE ================= */
 body {
   background: black;
   overflow: hidden;
   color: white;
 }
 
-/* ================= SCENE BASE ================= */
+/* ================= SCENES ================= */
 .scene {
   position: absolute;
   width: 100%;
@@ -39,7 +38,7 @@ body {
   opacity: 1;
 }
 
-/* ================= FADE OVERLAY ================= */
+/* ================= FADE ================= */
 #fade {
   position: absolute;
   width: 100%;
@@ -51,7 +50,7 @@ body {
   z-index: 999;
 }
 
-/* ================= LOGIN ================= */
+/* ================= UI ================= */
 input {
   margin: 5px;
   padding: 10px;
@@ -87,6 +86,11 @@ button {
 .char:hover {
   background: #333;
 }
+
+/* ================= GAME ================= */
+#game {
+  background: #111;
+}
 </style>
 </head>
 
@@ -119,15 +123,22 @@ button {
   <div class="char" onclick="enterGame('archer')">🏹 Archer</div>
 </div>
 
+<!-- ================= GAME ================= -->
+<div id="game" class="scene">
+  <h2>GAME WORLD</h2>
+</div>
+
 <script>
+
 /* ================= STATE ================= */
 let currentScene = "login";
+let selectedJob = null;
 
 /* ================= SCENE SYSTEM ================= */
 function showScene(name) {
+
   const fade = document.getElementById("fade");
 
-  // fade in
   fade.style.opacity = 1;
 
   setTimeout(() => {
@@ -140,13 +151,12 @@ function showScene(name) {
 
     currentScene = name;
 
-    // fade out
     fade.style.opacity = 0;
 
   }, 300);
 }
 
-/* ================= LOGIN → LOADING ================= */
+/* ================= LOGIN FLOW ================= */
 function goLoading() {
   showScene("loading");
 
@@ -164,20 +174,27 @@ function goLoading() {
   }, 25);
 }
 
-<!-- ================= CHARACTER ================= -->
-<div id="char" class="scene">
-  <h2>Select Character</h2>
+/* ================= CHARACTER SELECT ================= */
+function enterGame(job) {
+  selectedJob = job;
+  console.log("Selected Job:", job);
 
-  <div class="char" onclick="enterGame('swordman')">⚔ Swordman</div>
-  <div class="char" onclick="enterGame('mage')">🔮 Mage</div>
-  <div class="char" onclick="enterGame('archer')">🏹 Archer</div>
-</div>
+  showScene("game");
 
-<!-- ================= GAME WORLD ================= -->
-<div id="game" class="scene">
-  <h2>GAME WORLD</h2>
-</div>
-  
+  startGame();
+}
+
+/* ================= GAME START ================= */
+function startGame() {
+  console.log("GAME STARTED");
+
+  // 之後這裡會放：
+  // - 玩家生成
+  // - 移動系統
+  // - 地圖
+  // - 怪物
+}
+
 </script>
 
 </body>
