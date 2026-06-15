@@ -1,123 +1,15 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: Arial;
-}
-
-/* 背景 */
 .bg {
   position: fixed;
+  top: 0;
+  left: 0;
+
   width: 100%;
   height: 100%;
-  background: url("https://github.com/chaiopi932-stack/roo-chaiopi/blob/main/assets/bg/background.png?raw=true") no-repeat center;
+
+  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png") no-repeat center center;
   background-size: cover;
-  filter: brightness(0.75);
-}
 
-/* 霧氣 */
-.fog {
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
-  animation: fog 18s linear infinite;
-}
+  filter: brightness(0.75) contrast(1.1);
 
-@keyframes fog {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-300px,-150px); }
-}
-
-/* 暗角 */
-.vignette {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6) 100%);
-}
-
-/* LOGO */
-.logo {
-  position: absolute;
-  top: 40px;
-  width: 100%;
-  text-align: center;
-  font-size: 34px;
-  color: gold;
-  text-shadow: 2px 2px black;
-}
-
-/* 視窗 */
-.window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 320px;
-  border: 2px solid #caa24a;
-  background: rgba(0,0,0,0.75);
-}
-
-/* 標題列 */
-.title-bar {
-  background: linear-gradient(#d4b35a, #8a6a1e);
-  padding: 5px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-/* 內容 */
-.content {
-  padding: 12px;
-  color: white;
-  font-size: 12px;
-}
-
-input {
-  width: 100%;
-  margin: 5px 0;
-  padding: 6px;
-  background: #111;
-  border: 1px solid #444;
-  color: white;
-}
-
-button {
-  width: 100%;
-  padding: 6px;
-  margin-top: 10px;
-  background: linear-gradient(#ffd36b, #b8860b);
-  border: none;
-  cursor: pointer;
-}
-
-.links {
-  margin-top: 8px;
-  text-align: center;
-  font-size: 11px;
-  color: #aaa;
-}
-.vignette {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.65) 100%);
-  pointer-events: none;
-}
-.fog {
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
-  animation: fog 20s linear infinite;
-}
-
-@keyframes fog {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-300px,-200px); }
-}
-.window {
-  border: 2px solid #caa24a;
-  box-shadow: 0 0 15px rgba(0,0,0,0.8);
-  background: rgba(0,0,0,0.75);
+  z-index: -1;
 }
