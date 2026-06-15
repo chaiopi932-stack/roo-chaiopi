@@ -1,3 +1,4 @@
+console.log("GAME JS LOADED");
 const bgm = document.getElementById("bgm");
 const click = document.getElementById("click");
 
