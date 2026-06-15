@@ -4,8 +4,11 @@ const text = "Welcome to Midgard...";
 let i = 0;
 
 function typing() {
+  const el = document.getElementById("typing");
+  if (!el) return;
+
   if (i < text.length) {
-    document.getElementById("typing").innerHTML += text[i];
+    el.innerHTML += text[i];
     i++;
     setTimeout(typing, 50);
   }
@@ -17,14 +20,12 @@ function login() {
   const loading = document.getElementById("loading");
   const game = document.getElementById("game");
 
-  // LOGIN fade out
   login.style.transition = "0.5s";
   login.style.opacity = "0";
 
   setTimeout(() => {
     login.style.display = "none";
 
-    // LOADING
     loading.style.display = "block";
 
     setTimeout(() => {
