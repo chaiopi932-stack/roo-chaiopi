@@ -97,11 +97,15 @@ body {
 
   width: 320px;
 
-  border: 2px solid #caa24a;
+  border: 2px solid #d4af37;
 
-  background: rgba(0, 0, 0, 0.75);
+background: rgba(0, 0, 0, 0.80);
 
-  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+box-shadow:
+  0 12px 30px rgba(0,0,0,0.85),
+  inset 0 0 10px rgba(255,215,0,0.08);
+
+backdrop-filter: blur(2px);
 
   z-index: 2;
 }
@@ -144,20 +148,46 @@ input {
 /* =========================
    🔘 按鈕
 ========================= */
+
 button {
   width: 100%;
 
-  padding: 6px;
+  padding: 8px;
   margin-top: 10px;
 
-  background: linear-gradient(#ffd36b, #b8860b);
-
-  border: none;
+  background: linear-gradient(180deg, #ffe08a, #b8860b);
+  border: 1px solid #f5d77a;
 
   cursor: pointer;
 
   font-weight: bold;
+
+  color: #2b1b00;
+
+  box-shadow:
+    0 4px 0 #7a5a00,
+    0 6px 15px rgba(0,0,0,0.5);
+
+  transition: all 0.12s ease;
 }
+
+button:hover {
+  filter: brightness(1.15);
+
+  box-shadow:
+    0 0 10px rgba(255, 215, 0, 0.6),
+    0 4px 0 #7a5a00,
+    0 6px 15px rgba(0,0,0,0.5);
+}
+
+button:active {
+  transform: translateY(2px);
+
+  box-shadow:
+    0 2px 0 #7a5a00,
+    0 3px 8px rgba(0,0,0,0.5);
+}
+
 
 /* hover效果 */
 button:hover {
