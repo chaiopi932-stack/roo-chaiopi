@@ -1,20 +1,35 @@
-<div class="bg"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<div class="window">
-  <div class="title">Login Window</div>
+<body>
 
-  <div class="content">
-    <div id="typing"></div>
+  <!-- 🎮 背景 -->
+  <div class="bg"></div>
 
-    <input placeholder="Account ID">
-    <input type="password" placeholder="Password">
+  <!-- 🪟 登入框 -->
+  <div class="window">
+    <div class="title">Login Window</div>
 
-    <button onclick="login()">OK</button>
+    <div class="content">
+      <div>Welcome to Midgard...</div>
 
-    <div class="links">
-      Create Account ｜ Find Password
+      <input type="text" placeholder="Account ID">
+      <input type="password" placeholder="Password">
+
+      <button onclick="login()">OK</button>
+
+      <div style="font-size:12px;color:#aaa;margin-top:8px;">
+        Create Account ｜ Find Password
+      </div>
     </div>
   </div>
-</div>
 
-<audio id="bgm" loop></audio>
+  <script src="game.js"></script>
+
+</body>
+</html>
