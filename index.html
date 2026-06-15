@@ -2,19 +2,19 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>RO Login 95%</title>
+<title>RO Login Ultimate</title>
 
 <style>
-/* =========================
-   基礎
-========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
 }
 
+/* =========================
+   背景（視差 + 呼吸暗光）
+========================= */
 body {
   width: 100vw;
   height: 100vh;
@@ -24,19 +24,27 @@ body {
     center/cover no-repeat;
 
   position: relative;
+  animation: bgMove 12s ease-in-out infinite;
 }
 
-/* 暗角 + 景深 */
+/* 微視差 */
+@keyframes bgMove {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* 暗層 */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(0,0,0,0.1), rgba(0,0,0,0.55));
+  background: radial-gradient(circle at center,
+    rgba(0,0,0,0.1),
+    rgba(0,0,0,0.6));
 }
 
 /* =========================
-   LOGIN WINDOW（核心）
+   FLOAT LOGIN WINDOW
 ========================= */
 .window {
   position: absolute;
@@ -44,46 +52,50 @@ body::before {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 460px;
+  width: 470px;
 
-  background: linear-gradient(180deg, rgba(30,30,30,0.95), rgba(15,15,15,0.95));
-  border: 1px solid rgba(214, 180, 106, 0.9);
+  background: linear-gradient(180deg, rgba(25,25,25,0.95), rgba(10,10,10,0.95));
+  border: 1px solid rgba(210,170,90,0.9);
 
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.8),
-    inset 0 0 10px rgba(255, 220, 140, 0.15);
+    0 20px 60px rgba(0,0,0,0.85),
+    inset 0 0 12px rgba(255,220,140,0.12);
 
+  animation: float 5s ease-in-out infinite;
   z-index: 10;
-
-  animation: float 6s ease-in-out infinite;
 }
 
-/* 微浮動（遊戲感） */
+/* 浮動 */
 @keyframes float {
   0%,100% { transform: translate(-50%, -50%); }
   50% { transform: translate(-50%, -52%); }
 }
 
 /* =========================
-   TITLE BAR（金色）
+   TITLE BAR（金色流光）
 ========================= */
 .title {
-  background: linear-gradient(180deg, #f6e3b2, #c9a457);
+  position: relative;
   padding: 10px 12px;
+
+  background: linear-gradient(90deg,
+    #f7e3b0,
+    #caa457,
+    #f7e3b0);
+
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
 
   font-weight: bold;
   color: #2a1a05;
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
-.title span:last-child {
-  cursor: pointer;
-  opacity: 0.7;
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
 }
 
 /* =========================
@@ -101,30 +113,34 @@ body::before {
 }
 
 /* =========================
-   INPUT（RO風暗框）
+   INPUT
 ========================= */
 input {
   width: 100%;
   padding: 10px;
-
   margin-bottom: 10px;
 
-  background: linear-gradient(180deg, #0f0f0f, #151515);
+  background: #0f0f0f;
   border: 1px solid #444;
 
   color: white;
   outline: none;
 
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.9);
+}
+
+/* focus glow */
+input:focus {
+  border-color: #d8b46a;
+  box-shadow: 0 0 10px rgba(255,210,120,0.3);
 }
 
 /* =========================
-   OK BUTTON（核心亮點）
+   OK BUTTON（核心動畫）
 ========================= */
 button {
   width: 100%;
-  padding: 12px;
-
+  padding: 13px;
   margin-top: 6px;
 
   background: linear-gradient(180deg, #f7dc93, #b8862b);
@@ -133,18 +149,45 @@ button {
   font-weight: bold;
   cursor: pointer;
 
+  position: relative;
+  overflow: hidden;
+
   box-shadow:
-    0 4px 10px rgba(0,0,0,0.6),
-    0 0 10px rgba(255, 200, 120, 0.25);
+    0 5px 20px rgba(0,0,0,0.7),
+    0 0 18px rgba(255,210,120,0.25);
 
   transition: 0.2s;
 }
 
+/* 光掃過 */
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
 button:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
   box-shadow:
-    0 6px 16px rgba(0,0,0,0.7),
-    0 0 18px rgba(255, 210, 120, 0.45);
+    0 10px 30px rgba(0,0,0,0.8),
+    0 0 25px rgba(255,220,140,0.5);
 }
 
 button:active {
@@ -152,17 +195,7 @@ button:active {
 }
 
 /* =========================
-   LINKS
-========================= */
-.links {
-  margin-top: 12px;
-  font-size: 12px;
-  color: #d8c79a;
-  text-align: center;
-}
-
-/* =========================
-   SERVER LIST（木牌風）
+   SERVER MENU（點擊選中）
 ========================= */
 .server {
   position: absolute;
@@ -173,60 +206,63 @@ button:active {
 }
 
 .server div {
-  width: 110px;
+  width: 120px;
+  padding: 8px;
 
   margin: 6px 0;
-  padding: 8px 10px;
-
   text-align: center;
-  font-size: 13px;
+
+  background: rgba(0,0,0,0.55);
+  border: 1px solid #caa457;
 
   color: white;
-
-  background: linear-gradient(180deg, rgba(40,40,40,0.8), rgba(10,10,10,0.8));
-  border: 1px solid rgba(200,160,80,0.9);
-
   cursor: pointer;
 
   transition: 0.2s;
 }
 
 .server div:hover {
+  transform: translateX(-4px);
   background: rgba(200,160,80,0.25);
-  transform: translateX(-3px);
+}
+
+/* selected state */
+.server div.active {
+  background: rgba(210,170,90,0.35);
+  box-shadow: 0 0 10px rgba(255,210,120,0.4);
 }
 
 /* =========================
-   小光點效果（RO感）
+   光粒子
 ========================= */
-.glow {
+.particle {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 
-  background: rgba(255, 220, 140, 0.8);
+  background: rgba(255,220,140,0.8);
   border-radius: 50%;
 
-  box-shadow: 0 0 12px rgba(255,220,140,0.9);
+  box-shadow: 0 0 10px rgba(255,220,140,0.9);
 
-  top: 20%;
-  left: 30%;
-
-  animation: glowMove 8s infinite;
+  animation: move 8s infinite linear;
 }
 
-@keyframes glowMove {
-  0% { transform: translate(0,0); opacity: 0.3; }
-  50% { transform: translate(120px, 80px); opacity: 1; }
-  100% { transform: translate(0,0); opacity: 0.3; }
+@keyframes move {
+  0% { transform: translate(0,0); opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { transform: translate(200px,-120px); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="glow"></div>
+<!-- particles -->
+<div class="particle" style="top:20%;left:30%"></div>
+<div class="particle" style="top:60%;left:70%"></div>
 
+<!-- login -->
 <div class="window">
 
   <div class="title">
@@ -242,14 +278,15 @@ button:active {
 
     <button>OK</button>
 
-    <div class="links">
+    <div style="text-align:center;margin-top:12px;color:#d8c79a;font-size:12px;">
       Create Account | Find Password
     </div>
   </div>
 </div>
 
+<!-- server -->
 <div class="server">
-  <div>Prontera</div>
+  <div class="active">Prontera</div>
   <div>Geffen</div>
   <div>Izlude</div>
   <div>Alberta</div>
