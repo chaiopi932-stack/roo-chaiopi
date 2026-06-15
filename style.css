@@ -9,14 +9,16 @@ body {
 ========================= */
 .bg {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
 
-  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
-  no-repeat center center;
+  width: 100vw;
+  height: 100vh;
 
+  background-image: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png");
   background-size: cover;
-
-  filter: brightness(0.75) contrast(1.1);
+  background-position: center;
+  background-repeat: no-repeat;
 
   z-index: 0;
 }
