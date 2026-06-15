@@ -8,7 +8,7 @@ function typing() {
   const el = document.getElementById("typing");
   if (!el) return;
 
-  if (i === 0) el.innerHTML = ""; // 🔥 reset
+  if (i === 0) el.innerHTML = "";
 
   if (i < text.length) {
     el.innerHTML += text[i];
@@ -17,43 +17,40 @@ function typing() {
   }
 }
 
-/* ================= LOGIN FLOW ================= */
+/* ================= LOGIN ================= */
 function login() {
-  const login = document.getElementById("login");
-  const loading = document.getElementById("loading");
-  const game = document.getElementById("game");
+  showScene("loading");
 
-  login.style.opacity = "0";
+  let p = 0;
+  let bar = document.querySelector(".bar");
 
-  setTimeout(() => {
-    login.style.display = "none";
+  let t = setInterval(() => {
+    p += 2;
 
-    loading.style.display = "flex";
+    if (bar) bar.style.width = p + "%";
 
-    let p = 0;
-    let bar = document.querySelector(".bar");
+    if (p >= 100) {
+      clearInterval(t);
 
-    let t = setInterval(() => {
-      p += 2;
-      if (bar) bar.style.width = p + "%";
+      showScene("char"); // ⭐ 正確：進角色選擇
+    }
+  }, 25);
+}
 
-      if (p >= 100) {
-        clearInterval(t);
+/* ================= CHARACTER SELECT ================= */
+function enterGame(job) {
+  console.log("Selected:", job);
 
-        loading.style.display = "none";
+  showScene("game");
 
-        game.style.display = "block";
-
-        startGame(); // 🔥 建議加
-      }
-    }, 25);
-
-  }, 400);
+  startGame(job);
 }
 
 /* ================= GAME START ================= */
-function startGame() {
-  console.log("GAME STARTED");
+function startGame(job) {
+  console.log("GAME STARTED:", job);
 
-  typing(); // 🔥 進遊戲才打字
+  i = 0; // reset typing
+
+  typing();
 }
