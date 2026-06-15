@@ -3,6 +3,9 @@ body {
   overflow: hidden;
   font-family: Arial, sans-serif;
 }
+body {
+  background: black;
+}
 
 /* =========================
    🎮 背景
