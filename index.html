@@ -2,197 +2,141 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>MMO Scene System V2 FULL</title>
+<title>RO 2D MMO V3</title>
 
 <style>
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial;
   box-sizing: border-box;
+  font-family: Arial;
 }
 
 body {
-  background: black;
   overflow: hidden;
-  color: white;
+  background: black;
 }
 
-/* ================= SCENES ================= */
+/* ================= SCENE ================= */
 .scene {
   position: absolute;
   width: 100%;
   height: 100%;
   display: none;
-
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  opacity: 0;
-  transition: opacity 0.6s ease;
 }
 
 .scene.active {
   display: flex;
-  opacity: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* ================= FADE ================= */
-#fade {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: black;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 999;
-}
-
-/* ================= UI ================= */
-input {
+/* ================= LOGIN ================= */
+input, button {
   margin: 5px;
   padding: 10px;
 }
 
-button {
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-/* ================= LOADING ================= */
-.bar-bg {
-  width: 300px;
-  height: 20px;
-  background: #333;
-}
-
-.bar {
-  height: 20px;
-  width: 0%;
-  background: gold;
-}
-
 /* ================= CHAR ================= */
 .char {
-  padding: 10px 20px;
-  margin: 10px;
+  padding: 10px;
   background: #222;
+  margin: 10px;
   cursor: pointer;
-  border: 1px solid #444;
+  color: white;
 }
 
-.char:hover {
-  background: #333;
-}
-
-/* ================= GAME ================= */
+/* ================= GAME WORLD ================= */
 #game {
-  background: #111;
+  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
+    center/cover no-repeat;
+}
+
+/* player */
+#player {
+  width: 30px;
+  height: 30px;
+  background: gold;
+  position: absolute;
 }
 </style>
 </head>
 
 <body>
 
-<div id="fade"></div>
-
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
 <div id="login" class="scene active">
-  <h2>LOGIN</h2>
-  <input placeholder="Account">
-  <input type="password" placeholder="Password">
-  <button onclick="goLoading()">Login</button>
-</div>
-
-<!-- ================= LOADING ================= -->
-<div id="loading" class="scene">
-  <h2>Loading World...</h2>
-  <div class="bar-bg">
-    <div class="bar"></div>
+  <div>
+    <h2>LOGIN</h2>
+    <input placeholder="Account">
+    <input type="password" placeholder="Password">
+    <button onclick="goChar()">Login</button>
   </div>
 </div>
 
-<!-- ================= CHARACTER ================= -->
+<!-- CHAR -->
 <div id="char" class="scene">
-  <h2>Select Character</h2>
-
-  <div class="char" onclick="enterGame('swordman')">⚔ Swordman</div>
-  <div class="char" onclick="enterGame('mage')">🔮 Mage</div>
-  <div class="char" onclick="enterGame('archer')">🏹 Archer</div>
+  <div>
+    <h2>Select Job</h2>
+    <div class="char" onclick="enterGame()">⚔ Swordman</div>
+    <div class="char" onclick="enterGame()">🔮 Mage</div>
+  </div>
 </div>
 
-<!-- ================= GAME ================= -->
+<!-- GAME -->
 <div id="game" class="scene">
-  <h2>GAME WORLD</h2>
+  <div id="player"></div>
 </div>
 
 <script>
 
-/* ================= STATE ================= */
-let currentScene = "login";
-let selectedJob = null;
+let player = {
+  x: 100,
+  y: 100,
+  speed: 5
+};
 
-/* ================= SCENE SYSTEM ================= */
-function showScene(name) {
+/* ================= SCENE ================= */
+function show(scene) {
+  document.querySelectorAll(".scene").forEach(s => {
+    s.classList.remove("active");
+  });
 
-  const fade = document.getElementById("fade");
-
-  fade.style.opacity = 1;
-
-  setTimeout(() => {
-
-    document.querySelectorAll(".scene").forEach(s => {
-      s.classList.remove("active");
-    });
-
-    document.getElementById(name).classList.add("active");
-
-    currentScene = name;
-
-    fade.style.opacity = 0;
-
-  }, 300);
+  document.getElementById(scene).classList.add("active");
 }
 
-/* ================= LOGIN FLOW ================= */
-function goLoading() {
-  showScene("loading");
-
-  let p = 0;
-  let bar = document.querySelector(".bar");
-
-  let t = setInterval(() => {
-    p += 2;
-    bar.style.width = p + "%";
-
-    if (p >= 100) {
-      clearInterval(t);
-      showScene("char");
-    }
-  }, 25);
+/* ================= LOGIN ================= */
+function goChar() {
+  show("char");
 }
 
-/* ================= CHARACTER SELECT ================= */
-function enterGame(job) {
-  selectedJob = job;
-  console.log("Selected Job:", job);
-
-  showScene("game");
-
-  startGame();
+/* ================= GAME ================= */
+function enterGame() {
+  show("game");
+  updatePlayer();
 }
 
-/* ================= GAME START ================= */
-function startGame() {
-  console.log("GAME STARTED");
+/* ================= MOVEMENT ================= */
+document.addEventListener("keydown", (e) => {
 
-  // 之後這裡會放：
-  // - 玩家生成
-  // - 移動系統
-  // - 地圖
-  // - 怪物
+  if (document.getElementById("game").classList.contains("active")) {
+
+    if (e.key === "w") player.y -= player.speed;
+    if (e.key === "s") player.y += player.speed;
+    if (e.key === "a") player.x -= player.speed;
+    if (e.key === "d") player.x += player.speed;
+
+    updatePlayer();
+  }
+});
+
+/* ================= RENDER ================= */
+function updatePlayer() {
+  const p = document.getElementById("player");
+
+  p.style.left = player.x + "px";
+  p.style.top = player.y + "px";
 }
 
 </script>
