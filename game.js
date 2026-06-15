@@ -14,5 +14,5 @@ function goChar() {
 /* CHAR → GAME */
 function enterGame() {
   showScene("game");
-  console.log("GAME STARTED");
+  console.log("GAME START");
 }
