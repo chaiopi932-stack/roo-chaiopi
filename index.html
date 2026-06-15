@@ -2,33 +2,38 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>RPG Login</title>
+<title>RPG Login Fixed</title>
 
 <style>
-/* ====== 基礎設定 ====== */
+/* ===== 基礎 ===== */
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   box-sizing: border-box;
+  font-family: Arial;
 }
 
-/* ====== 背景 ====== */
+/* ===== 背景（重點修正） ===== */
 body {
+  width: 100vw;
   height: 100vh;
+
+  /* ⚠️ 這裡一定要換成你的圖 */
+  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png") center center / cover no-repeat;
+
   overflow: hidden;
-  background: url("your-image.jpg") center/cover no-repeat;
+  position: relative;
 }
 
-/* ====== 半透明遮罩（提升UI對比） ====== */
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
+/* ===== 暗色遮罩（讓 UI 清楚） ===== */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: rgba(0,0,0,0.25);
 }
 
-/* ====== 主登入視窗 ====== */
+/* ===== 登入框置中（重點修正） ===== */
 .window {
   position: absolute;
   top: 50%;
@@ -36,138 +41,99 @@ body {
   transform: translate(-50%, -50%);
 
   width: 420px;
-  background: rgba(25, 25, 25, 0.88);
-  border: 1px solid #d8b46a;
-  box-shadow: 0 0 25px rgba(255, 200, 120, 0.25);
+  background: rgba(25,25,25,0.92);
+  border: 1px solid #d6b25e;
+  z-index: 10;
 }
 
-/* ====== 標題列 ====== */
+/* ===== title ===== */
 .title {
-  background: linear-gradient(#f2e2b5, #c8a45a);
+  background: linear-gradient(#f4e3b2, #c8a45a);
   padding: 10px;
   font-weight: bold;
-  color: #2b1a05;
-
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
-.close {
-  cursor: pointer;
-  font-size: 18px;
-}
-
-/* ====== 內容 ====== */
+/* ===== content ===== */
 .content {
   padding: 20px;
   color: white;
 }
 
-.welcome {
-  margin-bottom: 15px;
-  color: #e7d39a;
-  font-size: 14px;
-}
-
-/* ====== 輸入框 ====== */
 input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 8px 0;
 
-  border: 1px solid #444;
   background: #111;
+  border: 1px solid #444;
   color: white;
 }
 
-/* ====== 按鈕 ====== */
 button {
   width: 100%;
   padding: 12px;
+  margin-top: 10px;
 
   background: linear-gradient(#f7d98a, #b8862b);
-  border: 1px solid #7a5a1e;
-
+  border: none;
+  cursor: pointer;
   font-weight: bold;
-  cursor: pointer;
 }
 
-button:hover {
-  filter: brightness(1.1);
-}
-
-/* ====== 底部連結 ====== */
-.links {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #d8c79a;
-  text-align: center;
-  cursor: pointer;
-}
-
-/* ====== 右側伺服器（可選） ====== */
+/* ===== server（固定右側） ===== */
 .server {
   position: absolute;
-  right: 40px;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
-  color: white;
+  z-index: 10;
 }
 
 .server div {
   background: rgba(0,0,0,0.6);
+  border: 1px solid #c8a45a;
+  color: white;
   padding: 8px 12px;
   margin: 6px 0;
-  border: 1px solid #c8a45a;
   cursor: pointer;
-}
-
-.server div:hover {
-  background: rgba(200,160,90,0.3);
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay"></div>
-
-<!-- 登入視窗 -->
 <div class="window">
 
   <div class="title">
     <span>Login Window</span>
-    <span class="close">×</span>
+    <span>×</span>
   </div>
 
   <div class="content">
-    <div class="welcome">Welcome to Midgard.</div>
+    <p style="color:#e6d39a;margin-bottom:10px;">
+      Welcome to Midgard.
+    </p>
 
-    <input type="text" placeholder="Account ID">
+    <input placeholder="Account ID">
     <input type="password" placeholder="Password">
 
-    <button onclick="login()">OK</button>
+    <button>OK</button>
 
-    <div class="links">
+    <p style="text-align:center;margin-top:10px;font-size:12px;color:#cdbb8a;">
       Create Account | Find Password
-    </div>
+    </p>
   </div>
 </div>
 
-<!-- 右側伺服器選單 -->
+<!-- server -->
 <div class="server">
   <div>Prontera</div>
   <div>Geffen</div>
   <div>Izlude</div>
   <div>Alberta</div>
 </div>
-
-<script>
-function login() {
-  alert("登入成功（示範）");
-}
-</script>
 
 </body>
 </html>
