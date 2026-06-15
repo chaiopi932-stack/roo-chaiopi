@@ -2,143 +2,240 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>RO 2D MMO V3</title>
+<title>RO Login Ultimate</title>
 
 <style>
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
 }
 
 body {
   overflow: hidden;
-  background: black;
 }
 
-/* ================= SCENE ================= */
+/* ================= BACKGROUND ================= */
+body {
+  width: 100vw;
+  height: 100vh;
+
+  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
+    center/cover no-repeat;
+}
+
+/* 暗角 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center,
+    rgba(0,0,0,0.1),
+    rgba(0,0,0,0.75));
+  pointer-events: none;
+}
+
+/* ================= SCENES ================= */
 .scene {
   position: absolute;
   width: 100%;
   height: 100%;
   display: none;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .scene.active {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
-/* ================= LOGIN ================= */
-input, button {
-  margin: 5px;
+/* ================= LOGIN WINDOW ================= */
+.window {
+  width: 360px;
+
+  background: rgba(10,10,10,0.85);
+  border: 2px solid #d4af37;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.8),
+    inset 0 0 12px rgba(255,215,0,0.08);
+
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* TITLE */
+.title {
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: bold;
+
+  background: linear-gradient(180deg, #f7d774, #b8860b);
+  color: black;
+}
+
+/* CONTENT */
+.content {
+  padding: 16px;
+  color: white;
+  font-size: 13px;
+}
+
+.welcome {
+  margin-bottom: 10px;
+  color: #e6d39a;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+
+  background: rgba(0,0,0,0.6);
+  border: 1px solid #444;
+  color: white;
+}
+
+input:focus {
+  border: 1px solid #f5d77a;
+  box-shadow: 0 0 8px rgba(255,215,0,0.25);
+  outline: none;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  margin-top: 10px;
   padding: 10px;
+
+  background: linear-gradient(180deg, #ffe08a, #b8860b);
+  border: 1px solid #f5d77a;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 0 #7a5a00,
+    0 8px 18px rgba(0,0,0,0.5);
+
+  transition: 0.15s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(2px);
 }
 
 /* ================= CHAR ================= */
 .char {
-  padding: 10px;
-  background: #222;
-  margin: 10px;
+  padding: 10px 20px;
+  margin: 8px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid #caa457;
   cursor: pointer;
-  color: white;
 }
 
-/* ================= GAME WORLD ================= */
-#game {
-  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
-    center/cover no-repeat;
+.char:hover {
+  background: rgba(200,160,80,0.2);
 }
 
-/* player */
-#player {
-  width: 30px;
-  height: 30px;
-  background: gold;
+/* ================= SERVER ================= */
+.server {
   position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.server div {
+  padding: 8px 14px;
+  margin: 6px 0;
+
+  background: rgba(0,0,0,0.6);
+  border: 1px solid #caa457;
+  color: white;
+  cursor: pointer;
+}
+
+.server div:hover {
+  background: rgba(200,160,80,0.25);
+}
+
+/* ================= FOG ================= */
+.fog {
+  position: fixed;
+  inset: 0;
+
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
+  animation: fogMove 30s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fogMove {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(-200px,-120px); }
 }
 </style>
 </head>
 
 <body>
 
+<div class="fog"></div>
+
 <!-- LOGIN -->
 <div id="login" class="scene active">
-  <div>
-    <h2>LOGIN</h2>
-    <input placeholder="Account">
-    <input type="password" placeholder="Password">
-    <button onclick="goChar()">Login</button>
+  <div class="window">
+    <div class="title">Login Window</div>
+
+    <div class="content">
+      <div class="welcome">Welcome to Midgard.</div>
+
+      <input placeholder="Account ID">
+      <input type="password" placeholder="Password">
+
+      <button onclick="goChar()">Login</button>
+    </div>
   </div>
 </div>
 
 <!-- CHAR -->
 <div id="char" class="scene">
-  <div>
-    <h2>Select Job</h2>
-    <div class="char" onclick="enterGame()">⚔ Swordman</div>
-    <div class="char" onclick="enterGame()">🔮 Mage</div>
+  <div class="window">
+    <div class="title">Select Character</div>
+
+    <div class="content">
+      <div class="char" onclick="enterGame()">⚔ Swordman</div>
+      <div class="char" onclick="enterGame()">🔮 Mage</div>
+      <div class="char" onclick="enterGame()">🏹 Archer</div>
+    </div>
   </div>
 </div>
 
 <!-- GAME -->
 <div id="game" class="scene">
-  <div id="player"></div>
+  <h2 style="color:white">GAME WORLD</h2>
 </div>
 
 <script>
-
-let player = {
-  x: 100,
-  y: 100,
-  speed: 5
-};
-
-/* ================= SCENE ================= */
-function show(scene) {
-  document.querySelectorAll(".scene").forEach(s => {
-    s.classList.remove("active");
-  });
-
-  document.getElementById(scene).classList.add("active");
+function show(id) {
+  document.querySelectorAll(".scene").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-/* ================= LOGIN ================= */
 function goChar() {
   show("char");
 }
 
-/* ================= GAME ================= */
 function enterGame() {
   show("game");
-  updatePlayer();
 }
-
-/* ================= MOVEMENT ================= */
-document.addEventListener("keydown", (e) => {
-
-  if (document.getElementById("game").classList.contains("active")) {
-
-    if (e.key === "w") player.y -= player.speed;
-    if (e.key === "s") player.y += player.speed;
-    if (e.key === "a") player.x -= player.speed;
-    if (e.key === "d") player.x += player.speed;
-
-    updatePlayer();
-  }
-});
-
-/* ================= RENDER ================= */
-function updatePlayer() {
-  const p = document.getElementById("player");
-
-  p.style.left = player.x + "px";
-  p.style.top = player.y + "px";
-}
-
 </script>
 
 </body>
