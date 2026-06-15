@@ -164,12 +164,20 @@ function goLoading() {
   }, 25);
 }
 
-/* ================= CHARACTER → GAME ================= */
-function enterGame(job) {
-  alert("Selected: " + job);
+<!-- ================= CHARACTER ================= -->
+<div id="char" class="scene">
+  <h2>Select Character</h2>
 
-  // 未來這裡會進 GAME WORLD
-}
+  <div class="char" onclick="enterGame('swordman')">⚔ Swordman</div>
+  <div class="char" onclick="enterGame('mage')">🔮 Mage</div>
+  <div class="char" onclick="enterGame('archer')">🏹 Archer</div>
+</div>
+
+<!-- ================= GAME WORLD ================= -->
+<div id="game" class="scene">
+  <h2>GAME WORLD</h2>
+</div>
+  
 </script>
 
 </body>
