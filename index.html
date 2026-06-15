@@ -1,45 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>Midgard Login</title>
-<link rel="stylesheet" href="style.css">
+<title>RPG Login</title>
+
+<style>
+/* ====== 基礎設定 ====== */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* ====== 背景 ====== */
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: url("your-image.jpg") center/cover no-repeat;
+}
+
+/* ====== 半透明遮罩（提升UI對比） ====== */
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.25);
+}
+
+/* ====== 主登入視窗 ====== */
+.window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 420px;
+  background: rgba(25, 25, 25, 0.88);
+  border: 1px solid #d8b46a;
+  box-shadow: 0 0 25px rgba(255, 200, 120, 0.25);
+}
+
+/* ====== 標題列 ====== */
+.title {
+  background: linear-gradient(#f2e2b5, #c8a45a);
+  padding: 10px;
+  font-weight: bold;
+  color: #2b1a05;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ====== 內容 ====== */
+.content {
+  padding: 20px;
+  color: white;
+}
+
+.welcome {
+  margin-bottom: 15px;
+  color: #e7d39a;
+  font-size: 14px;
+}
+
+/* ====== 輸入框 ====== */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  border: 1px solid #444;
+  background: #111;
+  color: white;
+}
+
+/* ====== 按鈕 ====== */
+button {
+  width: 100%;
+  padding: 12px;
+
+  background: linear-gradient(#f7d98a, #b8862b);
+  border: 1px solid #7a5a1e;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+/* ====== 底部連結 ====== */
+.links {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #d8c79a;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* ====== 右側伺服器（可選） ====== */
+.server {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.server div {
+  background: rgba(0,0,0,0.6);
+  padding: 8px 12px;
+  margin: 6px 0;
+  border: 1px solid #c8a45a;
+  cursor: pointer;
+}
+
+.server div:hover {
+  background: rgba(200,160,90,0.3);
+}
+</style>
 </head>
 
 <body>
 
-<!-- 🎮 背景 -->
-<div class="bg"></div>
-<div class="fog"></div>
-<div class="vignette"></div>
+<div class="overlay"></div>
 
-<!-- 🪟 LOGIN -->
-<div class="window" id="login">
-  <div class="title">Login Window</div>
+<!-- 登入視窗 -->
+<div class="window">
+
+  <div class="title">
+    <span>Login Window</span>
+    <span class="close">×</span>
+  </div>
 
   <div class="content">
-    <div id="typing"></div>
+    <div class="welcome">Welcome to Midgard.</div>
 
-    <input placeholder="Account ID">
+    <input type="text" placeholder="Account ID">
     <input type="password" placeholder="Password">
 
     <button onclick="login()">OK</button>
 
-    <div class="links">Create Account ｜ Find Password</div>
+    <div class="links">
+      Create Account | Find Password
+    </div>
   </div>
 </div>
 
-<!-- ⏳ LOADING -->
-<div class="loading" id="loading">
-  Entering Midgard...
+<!-- 右側伺服器選單 -->
+<div class="server">
+  <div>Prontera</div>
+  <div>Geffen</div>
+  <div>Izlude</div>
+  <div>Alberta</div>
 </div>
 
-<!-- 🎮 GAME -->
-<div class="game" id="game">
-  GAME START
-</div>
-
-<script src="game.js"></script>
+<script>
+function login() {
+  alert("登入成功（示範）");
+}
+</script>
 
 </body>
 </html>
