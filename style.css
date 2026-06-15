@@ -1,5 +1,15 @@
 body {
-  background: yellow;
+  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
+    center/cover no-repeat;
+
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
 }
 
 /* 🎮 背景圖（真正背景層） */
