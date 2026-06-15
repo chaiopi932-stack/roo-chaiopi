@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
 }
 
 body {
@@ -10,11 +10,11 @@ body {
   height: 100vh;
   overflow: hidden;
 
-  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
-    center/cover no-repeat;
+  /* ⭐ 關鍵：背景永遠在 body */
+  background: url("/mnt/data/image(395).png") center/cover no-repeat;
 }
 
-/* 暗角 */
+/* 暗角（RO 氣氛） */
 body::after {
   content: "";
   position: fixed;
@@ -23,7 +23,7 @@ body::after {
   pointer-events: none;
 }
 
-/* SCENE */
+/* ================= SCENE SYSTEM ================= */
 .scene {
   position: absolute;
   width: 100%;
@@ -38,21 +38,22 @@ body::after {
   display: flex;
 }
 
-/* WINDOW */
+/* ================= LOGIN WINDOW ================= */
 .window {
   width: 360px;
   background: rgba(10,10,10,0.85);
   border: 2px solid #d4af37;
   border-radius: 6px;
   overflow: hidden;
+
   box-shadow: 0 20px 60px rgba(0,0,0,0.8);
 }
 
 .title {
   padding: 8px 12px;
   background: linear-gradient(180deg, #f7d774, #b8860b);
-  color: black;
   font-weight: bold;
+  color: black;
 }
 
 .content {
@@ -73,13 +74,14 @@ button {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
+
   background: linear-gradient(180deg, #ffe08a, #b8860b);
   border: none;
   cursor: pointer;
   font-weight: bold;
 }
 
-/* CHAR */
+/* ================= CHAR ================= */
 .char {
   padding: 10px;
   margin: 6px;
@@ -92,8 +94,8 @@ button {
   background: rgba(200,160,80,0.2);
 }
 
-/* GAME */
+/* ================= GAME ================= */
 #game {
   color: white;
-  font-size: 24px;
+  font-size: 28px;
 }
