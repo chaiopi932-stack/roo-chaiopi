@@ -23,5 +23,15 @@ typing();
 
 // 登入
 function login() {
-  console.log("LOGIN FIRED");
+  const win = document.querySelector(".window");
+
+  // fade out
+  win.style.transition = "0.6s ease";
+  win.style.opacity = "0";
+  win.style.transform = "translate(-50%, -50%) scale(0.9)";
+
+  setTimeout(() => {
+    win.style.display = "none";
+    console.log("Entered Midgard");
+  }, 600);
 }
