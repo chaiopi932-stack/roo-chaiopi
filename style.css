@@ -9,7 +9,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: url("assets/bg/background.png") no-repeat center;
+  background: url("https://github.com/chaiopi932-stack/roo-chaiopi/blob/main/assets/bg/background.png?raw=true") no-repeat center;
   background-size: cover;
   filter: brightness(0.75);
 }
