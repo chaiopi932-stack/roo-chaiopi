@@ -1,8 +1,10 @@
 body {
-  background: yellow !important;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
 }
 
-/* 🎮 背景圖（真正背景層） */
+/* 🎮 唯一背景層 */
 body::before {
   content: "";
   position: fixed;
@@ -21,6 +23,7 @@ body::before {
   background: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
   animation: fogMove 40s linear infinite;
   z-index: 1;
+  pointer-events: none;
 }
 
 /* 🌑 vignette */
@@ -29,6 +32,7 @@ body::before {
   inset: 0;
   background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7));
   z-index: 2;
+  pointer-events: none;
 }
 
 /* 🪟 UI */
