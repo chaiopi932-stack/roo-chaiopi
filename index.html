@@ -1,37 +1,20 @@
-<div class="scene">
+<div class="bg"></div>
 
-  <div class="bg"></div>
-  <div class="vignette"></div>
-  <div class="fog"></div>
+<div class="window">
+  <div class="title">Login Window</div>
 
-  <div class="logo">ファンタジーの伝説
-</div>
+  <div class="content">
+    <div id="typing"></div>
 
-  <div class="window">
+    <input placeholder="Account ID">
+    <input type="password" placeholder="Password">
 
-    <div class="title-bar">
-      Login Window
-    </div>
+    <button onclick="login()">OK</button>
 
-    <div class="content">
-
-      <div class="welcome" id="typing"></div>
-
-      <input type="text" placeholder="Account ID">
-      <input type="password" placeholder="Password">
-
-      <button onclick="login()">OK</button>
-
-      <div class="links">
-        Create Account ｜ Find Password
-      </div>
-
+    <div class="links">
+      Create Account ｜ Find Password
     </div>
   </div>
-
 </div>
 
 <audio id="bgm" loop></audio>
-<audio id="click"></audio>
-
-<script src="./game.js" defer></script>
