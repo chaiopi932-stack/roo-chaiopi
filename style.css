@@ -19,8 +19,9 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 
-  z-index: -1;
+  z-index: 0;
 }
+
 /* =========================
    🌑 暗角效果（RO感核心）
 ========================= */
@@ -39,19 +40,15 @@ body {
    🌫 霧氣效果
 ========================= */
 .fog {
-  position: fixed;
-  inset: 0;
-
-  width: 200%;
-  height: 200%;
-
-  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 60%);
-
-  animation: fogMove 25s linear infinite;
-
-  pointer-events: none;
-
   z-index: 1;
+}
+
+.vignette {
+  z-index: 2;
+}
+
+.window {
+  z-index: 10;
 }
 
 @keyframes fogMove {
