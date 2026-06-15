@@ -1,7 +1,5 @@
 body {
-  margin: 0;
-  overflow: hidden;
-  position: relative;
+  background: red !important;
 }
 
 /* 🎮 唯一背景層 */
