@@ -2,295 +2,175 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>RO Login Ultimate</title>
+<title>MMO Scene System V2</title>
 
 <style>
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: Arial;
+  box-sizing: border-box;
 }
 
-/* =========================
-   背景（視差 + 呼吸暗光）
-========================= */
+/* ================= BASE ================= */
 body {
-  width: 100vw;
-  height: 100vh;
+  background: black;
   overflow: hidden;
-
-  background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
-    center/cover no-repeat;
-
-  position: relative;
-  animation: bgMove 12s ease-in-out infinite;
-}
-
-/* 微視差 */
-@keyframes bgMove {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-/* 暗層 */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center,
-    rgba(0,0,0,0.1),
-    rgba(0,0,0,0.6));
-}
-
-/* =========================
-   FLOAT LOGIN WINDOW
-========================= */
-.window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 470px;
-
-  background: linear-gradient(180deg, rgba(25,25,25,0.95), rgba(10,10,10,0.95));
-  border: 1px solid rgba(210,170,90,0.9);
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.85),
-    inset 0 0 12px rgba(255,220,140,0.12);
-
-  animation: float 5s ease-in-out infinite;
-  z-index: 10;
-}
-
-/* 浮動 */
-@keyframes float {
-  0%,100% { transform: translate(-50%, -50%); }
-  50% { transform: translate(-50%, -52%); }
-}
-
-/* =========================
-   TITLE BAR（金色流光）
-========================= */
-.title {
-  position: relative;
-  padding: 10px 12px;
-
-  background: linear-gradient(90deg,
-    #f7e3b0,
-    #caa457,
-    #f7e3b0);
-
-  background-size: 200% 100%;
-  animation: shimmer 4s linear infinite;
-
-  font-weight: bold;
-  color: #2a1a05;
-
-  display: flex;
-  justify-content: space-between;
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-/* =========================
-   CONTENT
-========================= */
-.content {
-  padding: 22px;
   color: white;
 }
 
-.welcome {
-  font-size: 14px;
-  color: #e7d39a;
-  margin-bottom: 14px;
-}
-
-/* =========================
-   INPUT
-========================= */
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-
-  background: #0f0f0f;
-  border: 1px solid #444;
-
-  color: white;
-  outline: none;
-
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.9);
-}
-
-/* focus glow */
-input:focus {
-  border-color: #d8b46a;
-  box-shadow: 0 0 10px rgba(255,210,120,0.3);
-}
-
-/* =========================
-   OK BUTTON（核心動畫）
-========================= */
-button {
-  width: 100%;
-  padding: 13px;
-  margin-top: 6px;
-
-  background: linear-gradient(180deg, #f7dc93, #b8862b);
-  border: 1px solid #7a5a1f;
-
-  font-weight: bold;
-  cursor: pointer;
-
-  position: relative;
-  overflow: hidden;
-
-  box-shadow:
-    0 5px 20px rgba(0,0,0,0.7),
-    0 0 18px rgba(255,210,120,0.25);
-
-  transition: 0.2s;
-}
-
-/* 光掃過 */
-button::before {
-  content: "";
+/* ================= SCENE BASE ================= */
+.scene {
   position: absolute;
-  top: 0;
-  left: -100%;
-
   width: 100%;
   height: 100%;
+  display: none;
 
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.4),
-    transparent
-  );
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-  transition: 0.5s;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
-button:hover::before {
-  left: 100%;
+.scene.active {
+  display: flex;
+  opacity: 1;
 }
 
-button:hover {
-  transform: scale(1.03);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.8),
-    0 0 25px rgba(255,220,140,0.5);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* =========================
-   SERVER MENU（點擊選中）
-========================= */
-.server {
+/* ================= FADE OVERLAY ================= */
+#fade {
   position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: black;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 999;
 }
 
-.server div {
-  width: 120px;
-  padding: 8px;
+/* ================= LOGIN ================= */
+input {
+  margin: 5px;
+  padding: 10px;
+}
 
-  margin: 6px 0;
-  text-align: center;
-
-  background: rgba(0,0,0,0.55);
-  border: 1px solid #caa457;
-
-  color: white;
+button {
+  padding: 10px 20px;
   cursor: pointer;
-
-  transition: 0.2s;
 }
 
-.server div:hover {
-  transform: translateX(-4px);
-  background: rgba(200,160,80,0.25);
+/* ================= LOADING ================= */
+.bar-bg {
+  width: 300px;
+  height: 20px;
+  background: #333;
 }
 
-/* selected state */
-.server div.active {
-  background: rgba(210,170,90,0.35);
-  box-shadow: 0 0 10px rgba(255,210,120,0.4);
+.bar {
+  height: 20px;
+  width: 0%;
+  background: gold;
 }
 
-/* =========================
-   光粒子
-========================= */
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-
-  background: rgba(255,220,140,0.8);
-  border-radius: 50%;
-
-  box-shadow: 0 0 10px rgba(255,220,140,0.9);
-
-  animation: move 8s infinite linear;
+/* ================= CHAR ================= */
+.char {
+  padding: 10px 20px;
+  margin: 10px;
+  background: #222;
+  cursor: pointer;
+  border: 1px solid #444;
 }
 
-@keyframes move {
-  0% { transform: translate(0,0); opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { transform: translate(200px,-120px); opacity: 0; }
+.char:hover {
+  background: #333;
 }
 </style>
 </head>
 
 <body>
 
-<!-- particles -->
-<div class="particle" style="top:20%;left:30%"></div>
-<div class="particle" style="top:60%;left:70%"></div>
+<div id="fade"></div>
 
-<!-- login -->
-<div class="window">
+<!-- ================= LOGIN ================= -->
+<div id="login" class="scene active">
+  <h2>LOGIN</h2>
+  <input placeholder="Account">
+  <input type="password" placeholder="Password">
+  <button onclick="goLoading()">Login</button>
+</div>
 
-  <div class="title">
-    <span>Login Window</span>
-    <span>×</span>
-  </div>
-
-  <div class="content">
-    <div class="welcome">Welcome to Midgard.</div>
-
-    <input placeholder="Account ID">
-    <input type="password" placeholder="Password">
-
-    <button>OK</button>
-
-    <div style="text-align:center;margin-top:12px;color:#d8c79a;font-size:12px;">
-      Create Account | Find Password
-    </div>
+<!-- ================= LOADING ================= -->
+<div id="loading" class="scene">
+  <h2>Loading World...</h2>
+  <div class="bar-bg">
+    <div class="bar"></div>
   </div>
 </div>
 
-<!-- server -->
-<div class="server">
-  <div class="active">Prontera</div>
-  <div>Geffen</div>
-  <div>Izlude</div>
-  <div>Alberta</div>
+<!-- ================= CHARACTER ================= -->
+<div id="char" class="scene">
+  <h2>Select Character</h2>
+
+  <div class="char" onclick="enterGame('swordman')">⚔ Swordman</div>
+  <div class="char" onclick="enterGame('mage')">🔮 Mage</div>
+  <div class="char" onclick="enterGame('archer')">🏹 Archer</div>
 </div>
+
+<script>
+/* ================= STATE ================= */
+let currentScene = "login";
+
+/* ================= SCENE SYSTEM ================= */
+function showScene(name) {
+  const fade = document.getElementById("fade");
+
+  // fade in
+  fade.style.opacity = 1;
+
+  setTimeout(() => {
+
+    document.querySelectorAll(".scene").forEach(s => {
+      s.classList.remove("active");
+    });
+
+    document.getElementById(name).classList.add("active");
+
+    currentScene = name;
+
+    // fade out
+    fade.style.opacity = 0;
+
+  }, 300);
+}
+
+/* ================= LOGIN → LOADING ================= */
+function goLoading() {
+  showScene("loading");
+
+  let p = 0;
+  let bar = document.querySelector(".bar");
+
+  let t = setInterval(() => {
+    p += 2;
+    bar.style.width = p + "%";
+
+    if (p >= 100) {
+      clearInterval(t);
+      showScene("char");
+    }
+  }, 25);
+}
+
+/* ================= CHARACTER → GAME ================= */
+function enterGame(job) {
+  alert("Selected: " + job);
+
+  // 未來這裡會進 GAME WORLD
+}
+</script>
 
 </body>
 </html>
