@@ -1,9 +1,5 @@
 body {
-  width: 100vw;
-  height: 100vh;
-
-  position: relative;
-  overflow: hidden;
+  background: red;
 }
 
 /* 🎮 背景圖（真正背景層） */
