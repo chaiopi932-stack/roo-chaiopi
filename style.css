@@ -2,20 +2,23 @@ body {
   width: 100vw;
   height: 100vh;
 
+  position: relative;
+  overflow: hidden;
+}
+
+/* 🎮 背景圖（真正背景層） */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
   background: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png")
     center/cover no-repeat;
 
-  overflow: hidden;
-  position: relative;
+  z-index: 0;
 }
 
-/* 🎮 背景 */
-
-body {
-  position: relative;
-}
-
-/* 🌫 霧 */
+/* 🌫 fog */
 .fog {
   position: fixed;
   inset: 0;
@@ -24,20 +27,7 @@ body {
   z-index: 1;
 }
 
-.vignette {
-  z-index: 2;
-}
-
-.window {
-  z-index: 10;
-}
-
-@keyframes fogMove {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-200px,-100px); }
-}
-
-/* 🌑 暗角 */
+/* 🌑 vignette */
 .vignette {
   position: fixed;
   inset: 0;
@@ -45,116 +35,8 @@ body {
   z-index: 2;
 }
 
-/* 🪟 LOGIN */
+/* 🪟 UI */
 .window {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 340px;
-
-  background: rgba(10,10,10,0.85);
-
-  border: 2px solid #d4af37;
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.9),
-    inset 0 0 15px rgba(255,215,0,0.08);
-
-  border-radius: 6px;
-
   z-index: 10;
-}
-
-/* title */
-.title {
-  background: linear-gradient(180deg, #f7d774, #b8860b);
-  color: black;
-  padding: 6px 10px;
-  font-weight: bold;
-  font-size: 13px;
-}
-
-/* content */
-.content {
-  padding: 14px;
-  color: white;
-  font-size: 12px;
-}
-
-/* input */
-input {
-  width: 100%;
-  margin: 6px 0;
-  padding: 8px;
-
-  background: rgba(0,0,0,0.6);
-  border: 1px solid #444;
-
-  color: white;
-  outline: none;
-}
-
-input:focus {
-  border: 1px solid #f5d77a;
-  box-shadow: 0 0 8px rgba(255,215,0,0.3);
-}
-
-/* button */
-button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-
-  background: linear-gradient(180deg, #ffe08a, #b8860b);
-
-  border: 1px solid #f5d77a;
-
-  font-weight: bold;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 4px 0 #7a5a00,
-    0 8px 18px rgba(0,0,0,0.5);
-
-  transition: 0.15s;
-}
-
-button:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-}
-
-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #7a5a00;
-}
-
-/* links */
-.links {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 11px;
-  color: #aaa;
-}
-
-/* loading */
-.loading {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  color: white;
-}
-
-/* game */
-.game {
-  display: none;
-  color: white;
-  text-align: center;
-  margin-top: 40vh;
-  font-size: 30px;
 }
