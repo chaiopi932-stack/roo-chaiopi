@@ -1,15 +1,10 @@
 body {
   margin: 0;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-}
-body {
+  font-family: Arial;
   background: black;
 }
 
-/* =========================
-   🎮 背景
-========================= */
+/* 背景（100%一定會看到） */
 .bg {
   position: fixed;
   inset: 0;
@@ -17,66 +12,11 @@ body {
   background-image: url("https://raw.githubusercontent.com/chaiopi932-stack/roo-chaiopi/main/assets/bg/background.png");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 
   z-index: 0;
 }
 
-/* =========================
-   🌑 暗角效果（RO感核心）
-========================= */
-.vignette {
-  position: fixed;
-  inset: 0;
-
-  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.65) 100%);
-
-  pointer-events: none;
-
-  z-index: 2;
-}
-
-/* =========================
-   🌫 霧氣效果
-========================= */
-.fog {
-  z-index: 1;
-}
-
-.vignette {
-  z-index: 2;
-}
-
-.window {
-  z-index: 10;
-}
-
-@keyframes fogMove {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-300px,-200px); }
-}
-
-/* =========================
-   🎮 LOGO
-========================= */
-.logo {
-  position: absolute;
-  top: 40px;
-  width: 100%;
-  text-align: center;
-
-  font-size: 34px;
-  font-weight: bold;
-
-  color: gold;
-  text-shadow: 2px 2px 0 black;
-
-  z-index: 3;
-}
-
-/* =========================
-   🪟 登入視窗（RO風格）
-========================= */
+/* 登入框 */
 .window {
   position: absolute;
   top: 50%;
@@ -84,104 +24,32 @@ body {
   transform: translate(-50%, -50%);
 
   width: 320px;
-
-  border: 2px solid #d4af37;
-
-  background: rgba(0, 0, 0, 0.80);
-
-  box-shadow:
-    0 12px 30px rgba(0,0,0,0.85),
-    inset 0 0 10px rgba(255,215,0,0.08);
-
-  backdrop-filter: blur(2px);
+  background: rgba(0,0,0,0.8);
+  border: 2px solid gold;
+  color: white;
 
   z-index: 10;
 }
 
-/* 標題列 */
-.title-bar {
-  background: linear-gradient(#d4b35a, #8a6a1e);
-
-  padding: 5px;
-
-  font-size: 12px;
-  font-weight: bold;
-
+.title {
+  background: gold;
   color: black;
-}
-
-/* 內容 */
-.content {
-  padding: 12px;
-
-  color: white;
+  padding: 5px;
   font-size: 12px;
 }
 
-/* =========================
-   ⌨ 輸入框
-========================= */
+.content {
+  padding: 10px;
+}
+
 input {
   width: 100%;
-
   margin: 5px 0;
   padding: 6px;
-
-  background: #111;
-  border: 1px solid #444;
-
-  color: white;
 }
 
-/* =========================
-   🔘 按鈕
-========================= */
 button {
   width: 100%;
-
-  padding: 8px;
   margin-top: 10px;
-
-  background: linear-gradient(180deg, #ffe08a, #b8860b);
-  border: 1px solid #f5d77a;
-
-  cursor: pointer;
-
-  font-weight: bold;
-
-  color: #2b1b00;
-
-  box-shadow:
-    0 4px 0 #7a5a00,
-    0 6px 15px rgba(0,0,0,0.5);
-
-  transition: all 0.12s ease;
-}
-
-button:hover {
-  filter: brightness(1.15);
-
-  box-shadow:
-    0 0 10px rgba(255, 215, 0, 0.6),
-    0 4px 0 #7a5a00,
-    0 6px 15px rgba(0,0,0,0.5);
-}
-
-button:active {
-  transform: translateY(2px);
-
-  box-shadow:
-    0 2px 0 #7a5a00,
-    0 3px 8px rgba(0,0,0,0.5);
-}
-
-/* =========================
-   🔗 小字連結
-========================= */
-.links {
-  margin-top: 8px;
-  text-align: center;
-
-  font-size: 11px;
-  color: #aaa;
+  padding: 8px;
 }
