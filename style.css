@@ -97,3 +97,27 @@ button {
   font-size: 11px;
   color: #aaa;
 }
+.vignette {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none;
+}
+.fog {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
+  animation: fog 20s linear infinite;
+}
+
+@keyframes fog {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(-300px,-200px); }
+}
+.window {
+  border: 2px solid #caa24a;
+  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.75);
+}
