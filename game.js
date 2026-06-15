@@ -22,5 +22,22 @@ typing();
 
 // 登入
 function login() {
-  alert("Entering Midgard...");
+  const win = document.querySelector(".window");
+
+  // 防呆：避免找不到
+  if (!win) {
+    console.log("window not found");
+    return;
+  }
+
+  // 淡出效果
+  win.style.transition = "0.6s ease";
+  win.style.opacity = "0";
+  win.style.transform = "translate(-50%, -50%) scale(0.9)";
+
+  // 0.6秒後真正移除
+  setTimeout(() => {
+    win.style.display = "none";
+    console.log("Login window hidden");
+  }, 600);
 }
